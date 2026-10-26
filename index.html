@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <title>Pokémon Emerald Version - RPG Web Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header bar -->
+    <header class="game-header">
+      <div class="logo-area">
+        <span class="pokeball-icon"></span>
+        <h1 class="game-title">POKéMON <span class="emerald-text">EMERALD</span></h1>
+      </div>
+      <div class="quick-actions">
+        <button id="btn-sound" class="hdr-btn" title="Toggle Sound (M)">
+          <span class="icon">🔊</span> <span class="label">Sound</span>
+        </button>
+        <button id="btn-fullscreen" class="hdr-btn" title="Toggle Fullscreen (F)">
+          <span class="icon">⛶</span> <span class="label">Expand</span>
+        </button>
+        <button id="btn-save-quick" class="hdr-btn" title="Quick Save">
+          <span class="icon">💾</span> <span class="label">Save</span>
+        </button>
+        <button id="btn-help" class="hdr-btn" title="Game Controls">
+          <span class="icon">❓</span> <span class="label">Controls</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Game Boy Advance Console Shell -->
+    <main class="console-wrapper">
+      <div class="gba-sp-shell" id="gba-shell">
+        <div class="shell-top-bezel">
+          <div class="speaker-grill">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="screen-brand">GAME BOY ADVANCE <span class="sp-badge">SP</span></div>
+          <div class="power-led" id="power-led" title="Power Indicator"></div>
+        </div>
+
+        <!-- The Screen Bezel -->
+        <div class="screen-housing">
+          <div class="screen-border">
+            <canvas id="gameCanvas" width="480" height="320"></canvas>
+            <div id="touch-overlay" class="touch-overlay"></div>
+          </div>
+        </div>
+
+        <!-- Shell Lower Body / Controls -->
+        <div class="shell-lower-controls">
+          <div class="dpad-container">
+            <div class="dpad">
+              <div class="dpad-btn up" data-key="ArrowUp" id="btn-up"><span>▲</span></div>
+              <div class="dpad-btn left" data-key="ArrowLeft" id="btn-left"><span>◀</span></div>
+              <div class="dpad-center"></div>
+              <div class="dpad-btn right" data-key="ArrowRight" id="btn-right"><span>▶</span></div>
+              <div class="dpad-btn down" data-key="ArrowDown" id="btn-down"><span>▼</span></div>
+            </div>
+          </div>
+
+          <div class="meta-buttons">
+            <div class="meta-btn-wrap">
+              <button class="pill-btn" data-key="KeyX" id="btn-select">SELECT</button>
+              <span class="btn-subtext">SELECT</span>
+            </div>
+            <div class="meta-btn-wrap">
+              <button class="pill-btn" data-key="KeyC" id="btn-start">START</button>
+              <span class="btn-subtext">MENU</span>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <div class="act-btn-wrap b-wrap">
+              <button class="round-btn btn-b" data-key="KeyX" id="btn-b">B</button>
+              <span class="btn-subtext">CANCEL/RUN</span>
+            </div>
+            <div class="act-btn-wrap a-wrap">
+              <button class="round-btn btn-a" data-key="KeyZ" id="btn-a">A</button>
+              <span class="btn-subtext">ACTION</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Keyboard Guide Bar -->
+    <footer class="controls-guide">
+      <div class="guide-item"><kbd>▲▼◀▶</kbd> / <kbd>WASD</kbd> Move</div>
+      <div class="guide-item"><kbd>Z</kbd> / <kbd>Space</kbd> Action / A</div>
+      <div class="guide-item"><kbd>X</kbd> / <kbd>Back</kbd> Cancel / B</div>
+      <div class="guide-item"><kbd>Shift</kbd> Run Shoes</div>
+      <div class="guide-item"><kbd>C</kbd> / <kbd>Enter</kbd> Start Menu</div>
+      <div class="guide-item"><kbd>M</kbd> Mute Audio</div>
+    </footer>
+
+    <!-- Help Modal Dialog -->
+    <div id="help-modal" class="modal-overlay hidden">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h2>POKéMON EMERALD GUIDE</h2>
+          <button id="modal-close" class="close-btn">✖</button>
+        </div>
+        <div class="modal-body">
+          <div class="help-section">
+            <h3>🎮 Controls</h3>
+            <p><strong>Movement:</strong> Arrow keys or W, A, S, D</p>
+            <p><strong>Running Shoes:</strong> Hold <kbd>Shift</kbd> (or B) while walking</p>
+            <p><strong>Interact / A Button:</strong> <kbd>Z</kbd>, <kbd>Space</kbd>, or <kbd>Enter</kbd></p>
+            <p><strong>Cancel / B Button:</strong> <kbd>X</kbd> or <kbd>Backspace</kbd></p>
+            <p><strong>In-game Menu:</strong> <kbd>C</kbd> or <kbd>M</kbd> or <kbd>Escape</kbd></p>
+          </div>
+          <div class="help-section">
+            <h3>🌲 How to Play</h3>
+            <p>1. Start in <strong>Littleroot Town</strong> and inspect Professor Birch's Bag to choose your starter (Treecko, Torchic, or Mudkip)!</p>
+            <p>2. Talk to <strong>Mom</strong> near your house to heal and receive Running Shoes!</p>
+            <p>3. Travel north along <strong>Route 101</strong> through the tall grass to encounter wild Pokémon (Poochyena, Zigzagoon, Wurmple, Taillow, Ralts)!</p>
+            <p>4. Battle wild Pokémon to earn EXP, level up, and evolve your starter at Level 16!</p>
+            <p>5. Visit <strong>Oldale Town</strong> to use the <strong>Pokémon Center</strong> (Nurse Joy heals your party for free) and buy Pokéballs at the Mart!</p>
+            <p>6. Explore northern <strong>Petalburg Woods</strong> and reach the ancient Sky Shrine to challenge the Legendary Dragon <strong>Rayquaza</strong>!</p>
+          </div>
+          <div class="help-section">
+            <h3>💾 Saving Your Game</h3>
+            <p>Press <kbd>C</kbd> to open the in-game menu and choose <strong>SAVE</strong>. Your progress, Pokémon team, items, and catches are saved directly to your browser!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
